@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Todo } from '../model/todo';
+import { Todo, TodoStatus } from '../model/todo';
 import { TodoService } from '../service/todo.service';
 
 import { FormsModule } from '@angular/forms';
@@ -31,4 +31,20 @@ export class TodoComponent {
   deleteTodo(todo: Todo) {
     this.todoService.deleteTodo(todo);
   }
+  getTodos() {
+    return this.todoService.getTodos();
+  }
+  getWaitingTodos() {
+    return this.todoService.getWaitingTodos();
+  }
+  getInProgressTodos() {
+    return this.todoService.getInProgressTodos();
+  }
+  getDoneTodos() {
+    return this.todoService.getDoneTodos();
+  }
+  changeStatus(todo: Todo, status: TodoStatus){
+    this.todoService.changeStatus(todo, status);
+  }
+  
 }
