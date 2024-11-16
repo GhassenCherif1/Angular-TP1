@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { CredentialsDto } from '../dto/credentials.dto';
 import { LoginResponseDto } from '../dto/login-response.dto';
 import { HttpClient } from '@angular/common/http';
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private http = inject(HttpClient);
 
+  public isAuth = signal<boolean>(false) 
   /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);
 
@@ -21,10 +22,11 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return this.isAuth()
   }
 
   logout() {
     localStorage.removeItem('token');
+    this.isAuth.set(false)
   }
 }

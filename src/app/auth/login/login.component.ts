@@ -29,6 +29,7 @@ export class LoginComponent {
         localStorage.setItem('token', response.id);
         this.toastr.success(`Bienvenu chez vous :)`);
         this.router.navigate([APP_ROUTES.cv]);
+        this.authService.isAuth.set(true)
       },
       error: (error) => {
         this.toastr.error('Veuillez vérifier vos credentials');
