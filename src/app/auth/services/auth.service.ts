@@ -15,7 +15,10 @@ export class AuthService {
   /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);
 
-  constructor() {}
+  constructor() {
+    const token = localStorage.getItem('token');
+    this.isAuth.set(!!token);
+  }
 
   login(credentials: CredentialsDto): Observable<LoginResponseDto> {
     return this.http.post<LoginResponseDto>(API.login, credentials);
@@ -27,6 +30,8 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('email');
     this.isAuth.set(false)
   }
 }

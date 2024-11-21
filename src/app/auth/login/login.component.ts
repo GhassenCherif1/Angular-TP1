@@ -27,6 +27,8 @@ export class LoginComponent {
     this.authService.login(credentials).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.id);
+        localStorage.setItem('userId', response.userId.toString());
+        localStorage.setItem("email", credentials.email);
         this.toastr.success(`Bienvenu chez vous :)`);
         this.router.navigate([APP_ROUTES.cv]);
         this.authService.isAuth.set(true)
