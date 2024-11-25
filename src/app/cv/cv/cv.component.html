@@ -1,12 +1,47 @@
+<app-autocomplete></app-autocomplete>
 <div class="row">
   <div class="col">
+    <!-- Display current date -->
     <div class="alert alert-warning">
       {{ date | date : "full" | uppercase }}
     </div>
-    <app-list [cvs]="cvs$ | async"></app-list>
+
+    <!-- Tabs for juniors and seniors -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a 
+          class="nav-link" 
+          [class.active]="activeTab === 'juniors'" 
+          (click)="setActiveTab('juniors')">
+          Juniors
+        </a>
+      </li>
+      <li class="nav-item">
+        <a 
+          class="nav-link" 
+          [class.active]="activeTab === 'seniors'" 
+          (click)="setActiveTab('seniors')">
+          Seniors
+        </a>
+      </li>
+    </ul>
+
+    <!-- CV List -->
+    <div class="mt-3">
+      <ng-container *ngIf="activeTab === 'juniors'">
+        <app-list [cvs]="juniors$ | async"></app-list>
+      </ng-container>
+      <ng-container *ngIf="activeTab === 'seniors'">
+        <app-list [cvs]="seniors$ | async"></app-list>
+      </ng-container>
+    </div>
   </div>
+
+  <!-- Selected CV card -->
   <div class="col">
     <app-cv-card [cv]="selectedCv"></app-cv-card>
   </div>
 </div>
+
+<!-- Embauche component -->
 <app-embauche></app-embauche>

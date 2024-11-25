@@ -131,4 +131,13 @@ export class CvService {
   selectCv(cv: Cv) {
     this.#selectCvSuject$.next(cv);
   }
+
+  searchCvs(searchTerm: string): Observable<any[]> {
+    const filter = JSON.stringify({
+      where: {
+        name: { like: `%${searchTerm}%` }, // LoopBack filter for name containing searchTerm
+      },
+    });
+    return this.http.get<Cv[]>(`${API.cv}?filter=${filter}`);
+  }
 }

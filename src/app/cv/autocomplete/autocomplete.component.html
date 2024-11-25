@@ -1,3 +1,12 @@
 <form [formGroup]="form">
   <input type="text" class="form-control" formControlName="search" />
 </form>
+<ul *ngIf="filteredCvs$ | async as cvs" class="dropdown">
+  <li
+    *ngFor="let cv of cvs"
+    (click)="selectCv(cv)"
+    class="dropdown-item"
+  >
+    {{ cv.name }} - {{ cv.age }} ans
+  </li>
+</ul>

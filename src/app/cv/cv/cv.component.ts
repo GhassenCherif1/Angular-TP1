@@ -4,17 +4,21 @@ import { LoggerService } from '../../services/logger.service';
 import { ToastrService } from 'ngx-toastr';
 import { CvService } from '../services/cv.service';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cv',
   templateUrl: './cv.component.html',
-  styleUrls: ['./cv.component.css'],
+  styleUrls: ['./cv.component.css']
 })
 export class CvComponent {
-  cvs$: Observable<Cv[]>; // Observable for CVs
+  cvs$: Observable<Cv[]>; // Observable for all CVs
+  juniors$: Observable<Cv[]>; // Observable for juniors
+  seniors$: Observable<Cv[]>; // Observable for seniors
   selectedCv: Cv | null = null;
   date = new Date();
+
+  activeTab = 'juniors'; // Track active tab
 
   constructor(
     private logger: LoggerService,
@@ -34,11 +38,20 @@ export class CvComponent {
       })
     );
 
+    // Divide CVs into juniors and seniors streams
+    this.juniors$ = this.cvs$.pipe(map((cvs) => cvs.filter((cv) => cv.age < 40)));
+    this.seniors$ = this.cvs$.pipe(map((cvs) => cvs.filter((cv) => cv.age >= 40)));
+
     // Log and show welcome message
     this.logger.logger('je suis le cvComponent');
     this.toastr.info('Bienvenu dans notre CvTech');
 
     // Subscribe to selected CV changes
     this.cvService.selectCv$.subscribe((cv) => (this.selectedCv = cv));
+  }
+
+  // Switch active tab
+  setActiveTab(tab: string) {
+    this.activeTab = tab;
   }
 }
