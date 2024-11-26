@@ -1,12 +1,16 @@
 <form [formGroup]="form">
   <input type="text" class="form-control" formControlName="search" />
 </form>
-<ul *ngIf="filteredCvs$ | async as cvs" class="dropdown">
-  <li
-    *ngFor="let cv of cvs"
-    (click)="selectCv(cv)"
-    class="dropdown-item"
-  >
+<ul *ngIf="filteredCvs$ | async as cvs" class="list-group">
+  <li 
+    *ngFor="let cv of cvs" 
+    (click)="selectCv(cv)" 
+    class="list-group-item"
+    style="cursor: pointer;">
+    <img [ngStyle]="{
+      width: size + 'px',
+      heigth: size + 'px'
+    }" class="rounded-circle" src="assets/images/{{cv.path | defaultImage}}" alt="{{cv.name}}">
     {{ cv.name }} - {{ cv.age }} ans
   </li>
 </ul>

@@ -17,6 +17,7 @@ export class AutocompleteComponent {
     return this.form.get("search")!;
   }
   form = this.formBuilder.group({ search: [""] });
+  size = 50;
   filteredCvs$: Observable<any[]> | undefined;
 
   ngOnInit(): void {
