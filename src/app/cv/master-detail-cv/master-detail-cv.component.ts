@@ -19,8 +19,8 @@ export class MasterDetailCvComponent implements OnInit {
     });
   }
 
-  // Redirige vers la vue de détail lorsqu'un CV est sélectionné
   onSelectCv(cv: Cv): void {
+    console.log(cv.id);
     this.router.navigate(['/list', cv.id]); // Redirection vers la route de détail
   }
 }

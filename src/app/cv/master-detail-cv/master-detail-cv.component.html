@@ -2,11 +2,10 @@
     <h2>Liste des CV</h2>
     <ul>
       <li *ngFor="let cv of cvs" (click)="onSelectCv(cv)">
-        {{ cv.name }} <!-- Afficher le nom du CV dans la liste -->
+        {{ cv.name }} 
       </li>
     </ul>
   </div>
   
-  <!-- La zone des détails sera affichée via la route enfant -->
-  <router-outlet></router-outlet> <!-- Route enfant pour afficher les détails -->
+  <router-outlet></router-outlet>
   
