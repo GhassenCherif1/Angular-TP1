@@ -10,7 +10,6 @@ import { NF404Component } from "./components/nf404/nf404.component";
 import { AuthGuard } from "./auth/guards/auth.guard";
 import { AddCvComponent } from "./cv/add-cv/add-cv.component";
 import { CvComponent } from "./cv/cv/cv.component";
-import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { RhComponent } from "./optimizationPattern/rh/rh.component";
 
 const routes: Route[] = [
@@ -21,7 +20,10 @@ const routes: Route[] = [
     component: CvComponent,
   },
   { path: "cv/add", component: AddCvComponent, canActivate: [AuthGuard] },
-  { path: "cv/:id", component: DetailsCvComponent },
+  {
+    path: 'cv/:id',
+    loadComponent: () => import("./cv/details-cv/details-cv.component").then(c => c.DetailsCvComponent)
+  },
   {
     path: "",
     component: FrontComponent,
