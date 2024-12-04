@@ -112,5 +112,6 @@ import { MasterDetailCvComponent } from "./cv/master-detail-cv/master-detail-cv.
     AuthInterceptorProvider,
     provideHttpClient(withInterceptorsFromDi()),
   ],
+  exports : [DetailsCvComponent]
 })
 export class AppModule {}

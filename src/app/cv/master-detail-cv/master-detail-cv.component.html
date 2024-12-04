@@ -1,11 +1,10 @@
 <div class="cv-list">
-    <h2>Liste des CV</h2>
-    <ul>
-      <li *ngFor="let cv of cvs" (click)="onSelectCv(cv)">
-        {{ cv.name }} 
-      </li>
-    </ul>
-  </div>
-  
-  <router-outlet></router-outlet>
-  
+  <h2>Liste des CV</h2>
+  <ul>
+    <li *ngFor="let cv of cvs" (click)="onSelectCv(cv)">
+      {{ cv.name }} 
+    </li>
+  </ul>
+</div>
+
+<router-outlet></router-outlet>
