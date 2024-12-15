@@ -13,18 +13,31 @@ const routes: Route[] = [
     path: "rh",
     loadComponent: ()=> import("./optimizationPattern/rh/rh.component").then(c => c.RhComponent) ,
   },
-  {
-    path: "cv",
-    loadComponent: ()=> import("./cv/cv/cv.component").then(c => c.CvComponent) ,
-  },
-  { path: "cv/add",
-    loadComponent: ()=> import("./cv/add-cv/add-cv.component").then(c => c.AddCvComponent) ,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'cv/:id',
-    loadComponent: () => import("./cv/details-cv/details-cv.component").then(c => c.DetailsCvComponent)
-  },
+ // groupement des routes
+ {
+  path: "cv",
+  loadChildren: async () => {
+    const routes = [
+      {
+        path: '',
+        loadComponent: () =>
+          {return import('./cv/cv/cv.component').then(c => c.CvComponent)},
+      },
+      {
+        path: 'add',
+        loadComponent: () =>
+          import('./cv/add-cv/add-cv.component').then(c => c.AddCvComponent),
+        canActivate: [AuthGuard],
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./cv/details-cv/details-cv.component').then(c => c.DetailsCvComponent),
+      },
+    ];
+    return routes;
+}
+},
   {
     path: '',
     loadComponent: () =>
