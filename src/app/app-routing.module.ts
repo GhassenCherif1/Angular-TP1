@@ -16,12 +16,8 @@ import { RhComponent } from "./optimizationPattern/rh/rh.component";
 const routes: Route[] = [
   { path: "login", component: LoginComponent },
   { path: "rh", component: RhComponent },
-  {
-    path: "cv",
-    component: CvComponent,
-  },
-  { path: "cv/add", component: AddCvComponent, canActivate: [AuthGuard] },
-  { path: "cv/:id", component: DetailsCvComponent },
+  { path: 'cv', loadChildren: () => import('./cv-tech/cv-tech.module').then(m => m.CvTechModule) },
+
   {
     path: "",
     component: FrontComponent,
