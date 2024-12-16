@@ -52,9 +52,12 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
 import { MasterDetailCvComponent } from "./cv/master-detail-cv/master-detail-cv.component";
+import { UserAddComponent } from "./optimizationPattern/user-list/user-add/user-add.component";
+import { ListDisplayComponent } from "./optimizationPattern/user-list/list-display/list-display.component";
 
 @NgModule({
   declarations: [
+
     AppComponent,
     FirstComponent,
     SecondComponent,
@@ -73,6 +76,7 @@ import { MasterDetailCvComponent } from "./cv/master-detail-cv/master-detail-cv.
     EmbaucheComponent,
     DefaultImagePipe,
     AutocompleteComponent,
+    UserListComponent,
     NgstyleComponent,
     MiniWordComponent,
     NgclassComponent,
@@ -89,12 +93,14 @@ import { MasterDetailCvComponent } from "./cv/master-detail-cv/master-detail-cv.
     SliderComponent,
     TestHttpComponent,
     RhComponent,
-    UserListComponent,
+
     ProductsComponent,
     MasterDetailCvComponent
   ],
   bootstrap: [AppComponent],
   imports: [
+    UserAddComponent,
+    ListDisplayComponent,
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule, // required animations module
