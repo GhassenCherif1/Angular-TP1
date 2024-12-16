@@ -27,7 +27,11 @@ const routes: Route[] = [
   {
     path: "list",
     component: MasterDetailCvComponent,
-    children: [{ path: ":id", component: DetailsCvComponent }],
+    children: [ {
+      path: ':id',
+      component: DetailsCvComponent,
+      resolve: { cv : cvResolver }, 
+    }],
   },
   {
     path: "products",
