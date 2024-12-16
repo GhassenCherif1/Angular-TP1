@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 import {User} from "../users.service";
+import memoize from "memo-decorator";
 
 export const fibonnaci = (n: number): number => {
   if (n==1 || n==0) {
@@ -23,6 +24,9 @@ export class UserListComponent {
     this.add.emit(this.userFullName);
     this.userFullName = '';
   }
+
+  // Cache the results of this function
+  @memoize()
   fibo(n: number): number {
     const fib = fibonnaci(n);
     console.log({n, fib});
